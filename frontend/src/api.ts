@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const api = axios.create({ baseURL: '/api' });
+// VITE_API_URL is set at build time for cloud deploys (e.g. https://xxx.onrender.com/api).
+// Falls back to /api for local dev where nginx proxies the call.
+export const api = axios.create({ baseURL: import.meta.env.VITE_API_URL ?? '/api' });
 
 const ACCESS = 'tt_access';
 const REFRESH = 'tt_refresh';
@@ -41,7 +43,7 @@ api.interceptors.response.use(
         refreshing =
           refreshing ??
           axios
-            .post('/api/auth/refresh', { refreshToken: tokens.refresh })
+            .post(`${import.meta.env.VITE_API_URL ?? '/api'}/auth/refresh`, { refreshToken: tokens.refresh })
             .then((res) => {
               tokens.set(res.data.accessToken, res.data.refreshToken);
               return res.data.accessToken as string;
