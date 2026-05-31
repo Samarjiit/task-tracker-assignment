@@ -26,9 +26,13 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
   constructor(private readonly config: ConfigService) {}
 
   onModuleInit(): void {
+    const password = this.config.get<string>('REDIS_PASSWORD');
+    const tls = this.config.get<boolean>('REDIS_TLS');
     this.client = new Redis({
       host: this.config.get<string>('REDIS_HOST'),
       port: this.config.get<number>('REDIS_PORT'),
+      ...(password ? { password } : {}),
+      ...(tls ? { tls: {} } : {}),
       maxRetriesPerRequest: 3,
       lazyConnect: false,
     });

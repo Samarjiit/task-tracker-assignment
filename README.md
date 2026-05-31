@@ -2,6 +2,10 @@
 
 A production-grade, **multi-tenant team task tracker** built with **NestJS + TypeScript**, **PostgreSQL (Prisma)**, **Redis**, and **JWT auth** with refresh-token rotation. Ships with role-based access control enforced at the guard level, Redis-cached task lists, full Swagger docs, a minimal React task board, integration tests, and one-command Docker deployment.
 
+## Demo
+
+[![Watch the demo](https://img.youtube.com/vi/0Qpi5V-ErVc/0.jpg)](https://youtu.be/0Qpi5V-ErVc)
+
 ---
 
 ## Quick start (one command)
